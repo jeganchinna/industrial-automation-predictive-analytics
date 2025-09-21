@@ -1,0 +1,58 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "panels": [
+    {
+      "type": "graph",
+      "title": "Vibration",
+      "datasource": "factory-data1",
+      "targets": [
+        {
+          "query": "from(bucket: \"factory-data1\")\n  |> range(start: -5m)\n  |> filter(fn: (r) => r._measurement == \"machine\")\n  |> filter(fn: (r) => r._field == \"vibration\")"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 },
+      "id": 1
+    },
+    {
+      "type": "graph",
+      "title": "Temperature",
+      "datasource": "factory-data1",
+      "targets": [
+        {
+          "query": "from(bucket: \"factory-data1\")\n  |> range(start: -5m)\n  |> filter(fn: (r) => r._measurement == \"machine\")\n  |> filter(fn: (r) => r._field == \"temperature\")"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 },
+      "id": 2
+    },
+    {
+      "type": "gauge",
+      "title": "Motor Load",
+      "datasource": "factory-data1",
+      "targets": [
+        {
+          "query": "from(bucket: \"factory-data1\")\n  |> range(start: -5m)\n  |> filter(fn: (r) => r._measurement == \"machine\")\n  |> filter(fn: (r) => r._field == \"motor_load\")\n  |> last()"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 8, "w": 12, "h": 6 },
+      "id": 3
+    },
+    {
+      "type": "stat",
+      "title": "Failure Soon",
+      "datasource": "factory-data1",
+      "targets": [
+        {
+          "query": "from(bucket: \"factory-data1\")\n  |> range(start: -1m)\n  |> filter(fn: (r) => r._measurement == \"machine\")\n  |> filter(fn: (r) => r._field == \"failure_soon\")\n  |> last()"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 8, "w": 12, "h": 6 },
+      "id": 4
+    }
+  ],
+  "title": "FM1",
+  "schemaVersion": 36,
+  "version": 1
+}
